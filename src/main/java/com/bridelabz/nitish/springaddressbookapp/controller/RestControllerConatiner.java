@@ -4,6 +4,7 @@ package com.bridelabz.nitish.springaddressbookapp.controller;
 import com.bridelabz.nitish.springaddressbookapp.dto.AddressBookDto;
 import com.bridelabz.nitish.springaddressbookapp.model.AddressBookData;
 import com.bridelabz.nitish.springaddressbookapp.service.AddressServiceImplementation;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,12 @@ public class RestControllerConatiner {
     }
 
     @GetMapping("/get/{id}")
-    public AddressBookData getAddressBookById(@PathVariable("id") Long id) {
+    public AddressBookData getAddressBookById(@Valid  @PathVariable("id") Long id) {
         return addressService.getAddressBookDto(id);
     }
 
     @PostMapping("/add")
-    public AddressBookData createAddressBook(@RequestBody AddressBookDto addressBook) {
+    public AddressBookData createAddressBook( @Valid @RequestBody AddressBookDto addressBook) {
         log.info("adding addressBook : {}", addressBook);
         return addressService.createAddressBookDto(addressBook);
 
@@ -42,7 +43,7 @@ public class RestControllerConatiner {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateAddressBook(@PathVariable("id") Long id, @RequestBody AddressBookDto addressBook) {
+    public ResponseEntity<?> updateAddressBook(@PathVariable("id") Long id,@Valid @RequestBody AddressBookDto addressBook) {
         return addressService.updateAddressBookDto(id, addressBook);
     }
 }
