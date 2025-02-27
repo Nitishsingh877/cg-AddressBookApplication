@@ -4,6 +4,7 @@ package com.bridelabz.nitish.springaddressbookapp.controller;
 import com.bridelabz.nitish.springaddressbookapp.dto.AddressBookDto;
 import com.bridelabz.nitish.springaddressbookapp.model.AddressBookData;
 import com.bridelabz.nitish.springaddressbookapp.service.AddressServiceImplementation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/address")
+@Slf4j
 public class RestControllerConatiner {
 
     @Autowired
@@ -29,7 +31,9 @@ public class RestControllerConatiner {
 
     @PostMapping("/add")
     public AddressBookData createAddressBook(@RequestBody AddressBookDto addressBook) {
+        log.info("adding addressBook : {}", addressBook);
         return addressService.createAddressBookDto(addressBook);
+
     }
 
     @DeleteMapping("/delete/{id}")
