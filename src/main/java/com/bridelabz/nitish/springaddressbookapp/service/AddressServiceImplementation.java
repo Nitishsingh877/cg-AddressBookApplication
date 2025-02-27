@@ -3,6 +3,7 @@ package com.bridelabz.nitish.springaddressbookapp.service;
 import com.bridelabz.nitish.springaddressbookapp.dto.AddressBookDto;
 import com.bridelabz.nitish.springaddressbookapp.model.AddressBookData;
 import com.bridelabz.nitish.springaddressbookapp.repository.IRepositoryInterface;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@Slf4j
 public class AddressServiceImplementation implements AddressServices{
 
     @Autowired
@@ -28,6 +30,7 @@ public class AddressServiceImplementation implements AddressServices{
     @Override
     public AddressBookData createAddressBookDto(AddressBookDto addressBookDto) {
         AddressBookData addressBookData = new AddressBookData(addressBookDto);
+        log.debug("AddressBookDto added : {}", addressBookDto);
         return repository.save(addressBookData);
     }
 
@@ -41,6 +44,7 @@ public class AddressServiceImplementation implements AddressServices{
             addressBookData.setPhone(addressBookDto.getPhone());
             addressBookData.setEmail(addressBookDto.getEmail());
             repository.save(addressBookData);
+            log.debug("AddressBookDto updated : {}", addressBookDto);
             return ResponseEntity.ok("Updated Successfully");
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
