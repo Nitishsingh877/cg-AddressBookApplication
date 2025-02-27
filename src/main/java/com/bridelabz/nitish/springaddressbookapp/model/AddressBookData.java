@@ -1,5 +1,6 @@
 package com.bridelabz.nitish.springaddressbookapp.model;
 
+import com.bridelabz.nitish.springaddressbookapp.dto.AddressBookDto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,9 +18,11 @@ public @Data class AddressBookData {
 
     public AddressBookData() {}
 
-    public AddressBookData(String name, long phone, String email) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
+    public AddressBookData(AddressBookDto addressBookDto) {
+        this.name = addressBookDto.getName();
+        this.phone = addressBookDto.getPhone();
+        this.email = addressBookDto.getEmail();
     }
+
+
 }
