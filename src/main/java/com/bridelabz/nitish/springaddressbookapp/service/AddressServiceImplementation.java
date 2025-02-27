@@ -48,7 +48,7 @@ public class AddressServiceImplementation implements AddressServices{
     }
 
     @Override
-    public ResponseEntity<String> deleteAddressBookDto(Long id) {
+    public ResponseEntity<?> deleteAddressBookDto(Long id) {
         if(repository.existsById(id)) {
             repository.deleteById(id);
             return ResponseEntity.ok("Deleted AddressBook");
